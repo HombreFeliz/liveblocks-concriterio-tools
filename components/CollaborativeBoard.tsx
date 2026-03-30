@@ -32,6 +32,7 @@ function StickyNote({
   const handlePointerDown = useCallback(
     (e: React.PointerEvent) => {
       if ((e.target as HTMLElement).tagName === "TEXTAREA") return;
+      if ((e.target as HTMLElement).closest("button")) return;
       e.preventDefault();
       e.currentTarget.setPointerCapture(e.pointerId);
       dragRef.current = {
