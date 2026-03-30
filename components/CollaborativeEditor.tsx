@@ -2,7 +2,15 @@
 
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useLiveblocksExtension, FloatingComposer, FloatingThreads, AnchoredThreads } from "@liveblocks/react-tiptap";
+import Placeholder from "@tiptap/extension-placeholder";
+import {
+  useLiveblocksExtension,
+  FloatingComposer,
+  FloatingThreads,
+  AnchoredThreads,
+  FloatingToolbar,
+  Toolbar,
+} from "@liveblocks/react-tiptap";
 import { useThreads } from "@liveblocks/react/suspense";
 
 export function CollaborativeEditor() {
@@ -12,6 +20,9 @@ export function CollaborativeEditor() {
   const editor = useEditor({
     extensions: [
       StarterKit,
+      Placeholder.configure({
+        placeholder: "Empieza a escribir… Los demás verán tus cambios en tiempo real.",
+      }),
       liveblocks,
     ],
     editorProps: {
@@ -25,8 +36,10 @@ export function CollaborativeEditor() {
     <div className="relative flex gap-6">
       <div className="flex-1 min-w-0">
         <div className="bg-surface rounded-lg border border-border overflow-hidden">
+          <Toolbar editor={editor} />
           <EditorContent editor={editor} />
           <FloatingComposer editor={editor} />
+          <FloatingToolbar editor={editor} />
           <FloatingThreads editor={editor} threads={threads} />
         </div>
       </div>
