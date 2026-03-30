@@ -33,17 +33,21 @@ export function CollaborativeEditor() {
   });
 
   return (
-    <div className="relative flex gap-6">
-      <div className="flex-1 min-w-0">
-        <div className="bg-surface rounded-lg border border-border overflow-hidden">
-          <Toolbar editor={editor} />
-          <EditorContent editor={editor} />
+    <div className="relative flex gap-6 h-full">
+      <div className="flex-1 min-w-0 flex flex-col">
+        <div className="bg-surface rounded-lg border border-border flex flex-col flex-1 min-h-0">
+          <div className="shrink-0 border-b border-border">
+            <Toolbar editor={editor} />
+          </div>
+          <div className="flex-1 overflow-y-auto">
+            <EditorContent editor={editor} />
+          </div>
           <FloatingComposer editor={editor} />
           <FloatingToolbar editor={editor} />
           <FloatingThreads editor={editor} threads={threads} />
         </div>
       </div>
-      <div className="hidden lg:block w-[300px] shrink-0">
+      <div className="hidden lg:block w-[300px] shrink-0 overflow-y-auto">
         <AnchoredThreads editor={editor} threads={threads} />
       </div>
     </div>
