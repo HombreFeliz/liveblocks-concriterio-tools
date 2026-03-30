@@ -1,3 +1,14 @@
+import type { LiveList, LiveObject } from "@liveblocks/client";
+
+export type Card = {
+  id: string;
+  text: string;
+  x: number;
+  y: number;
+  color: string;
+  author: string;
+};
+
 declare global {
   interface Liveblocks {
     Presence: {
@@ -11,6 +22,9 @@ declare global {
         name: string;
         color: string;
       };
+    };
+    Storage: {
+      cards: LiveList<LiveObject<Card>>;
     };
   }
 }
